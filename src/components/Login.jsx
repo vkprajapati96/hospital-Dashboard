@@ -9,7 +9,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const { setAdmin, setIsAuthenticated } = useContext(Context);
 
   const navigateTo = useNavigate();
 
@@ -28,6 +29,7 @@ const Login = () => {
         .then((res) => {
           toast.success(res.data.message);
           setIsAuthenticated(true);
+          setAdmin(res.data.user)
           navigateTo("/");
           setEmail("");
           setPassword("");

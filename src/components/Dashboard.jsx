@@ -8,6 +8,8 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
+  const { isAuthenticated, admin } = useContext(Context);
+
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -44,7 +46,6 @@ const Dashboard = () => {
     }
   };
 
-  const { isAuthenticated, admin } = useContext(Context);
   if (!isAuthenticated) {
     return <Navigate to={"/login"} />;
   }
