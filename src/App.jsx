@@ -21,7 +21,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/user/admin/me`,
+          `https://hospital-backend-81if.onrender.com/api/v1/user/admin/me`,
           {
             withCredentials: true,
             headers:{"Content-Type":"application/json"}
