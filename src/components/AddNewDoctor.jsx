@@ -20,6 +20,8 @@ const AddNewDoctor = () => {
   const [docAvatarPreview, setDocAvatarPreview] = useState("");
 
   const navigateTo = useNavigate();
+  const token = JSON.parse(localStorage.getItem("token"));
+
 
   const departmentsArray = [
     "Pediatrics",
@@ -60,7 +62,8 @@ const AddNewDoctor = () => {
       await axios
         .post(`https://hospital-backend-81if.onrender.com/api/v1/user/doctor/addnew`, formData, {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "application/json",'Authorization': token, }
+
         })
         .then((res) => {
           toast.success(res.data.message);

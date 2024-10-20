@@ -17,6 +17,8 @@ const AddNewAdmin = () => {
   const [password, setPassword] = useState("");
 
   const navigateTo = useNavigate();
+  const token = JSON.parse(localStorage.getItem("token"));
+
 
   const handleAddNewAdmin = async (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const AddNewAdmin = () => {
           { firstName, lastName, email, phone, nic, dob, gender, password },
           {
             withCredentials: true,
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",'Authorization': token, }
           }
         )
         .then((res) => {

@@ -23,10 +23,13 @@ const Login = () => {
           { email, password, confirmPassword, role: "Admin" },
           {
             withCredentials: true,
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" }
+            ,
           }
         )
         .then((res) => {
+          localStorage.setItem("token",JSON.stringify(res.data.token))
+          console.log(res.data)
           toast.success(res.data.message);
           setIsAuthenticated(true);
           setAdmin(res.data.user)

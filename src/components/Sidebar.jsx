@@ -16,10 +16,16 @@ const Sidebar = () => {
 
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
+
   const handleLogout = async () => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     await axios
+
       .get(`https://hospital-backend-81if.onrender.com/api/v1/user/admin/logout`, {
         withCredentials: true,
+        headers: { "Content-Type": "application/json",'Authorization': token, }
+
       })
       .then((res) => {
         toast.success(res.data.message);

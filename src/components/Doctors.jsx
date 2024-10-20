@@ -8,11 +8,18 @@ const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
   const { isAuthenticated } = useContext(Context);
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const fetchDoctors = async () => {
+      
       try {
+
         const { data } = await axios.get(
           `https://hospital-backend-81if.onrender.com/api/v1/user/doctors`,
-          { withCredentials: true }
+          { withCredentials: true ,
+            headers: { "Content-Type": "application/json",'Authorization': token, }
+
+          }
         );
         setDoctors(data.doctors);
       } catch (error) {

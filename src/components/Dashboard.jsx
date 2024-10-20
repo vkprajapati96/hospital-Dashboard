@@ -13,10 +13,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchAppointments = async () => {
+      const token = JSON.parse(localStorage.getItem("token"));
       try {
         const { data } = await axios.get(
           `https://hospital-backend-81if.onrender.com/api/v1/appointment/getall`,
-          { withCredentials: true }
+          { withCredentials: true ,
+            headers: { "Content-Type": "application/json",'Authorization': token, }
+
+          },
+          
         );
         setAppointments(data.appointments);
       } catch (error) {
@@ -27,11 +32,16 @@ const Dashboard = () => {
   }, []);
 
   const handleUpdateStatus = async (appointmentId, status) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     try {
       const { data } = await axios.put(
         `https://hospital-backend-81if.onrender.com/api/v1/appointment/update/${appointmentId}`,
         { status },
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: { "Content-Type": "application/json",'Authorization': token, }
+
+         }
       );
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>

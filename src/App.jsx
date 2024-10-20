@@ -17,14 +17,17 @@ const App = () => {
   const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
     useContext(Context);
 
-  useEffect(() => {
-    const fetchUser = async () => {
+
+    useEffect(() => {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      const fetchUser = async () => {
       try {
         const response = await axios.get(
           `https://hospital-backend-81if.onrender.com/api/v1/user/admin/me`,
           {
             withCredentials: true,
-            headers:{"Content-Type":"application/json"}
+            headers: { "Content-Type": "application/json",'Authorization': token, }
           }
         );
         setIsAuthenticated(true);

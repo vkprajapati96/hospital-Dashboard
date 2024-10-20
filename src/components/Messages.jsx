@@ -8,11 +8,17 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { isAuthenticated } = useContext(Context);
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const fetchMessages = async () => {
+
       try {
         const { data } = await axios.get(
           `https://hospital-backend-81if.onrender.com/api/v1/message/getall`,
-          { withCredentials: true }
+          { withCredentials: true ,
+            headers: { "Content-Type": "application/json",'Authorization': token, }
+
+          }
         );
         setMessages(data.messages);
       } catch (error) {
